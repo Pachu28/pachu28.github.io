@@ -267,6 +267,19 @@
   object-fit: cover;   /* CLAVE */
   border-radius: 14px;
 }
+    .img-wrap{
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+}
+
+.img-wrap img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
   </style>
 </head>
 
@@ -329,7 +342,9 @@
       <div class="grid">
         <div class="proj">
           <!-- ✅ Opción A (imagen real) -->
-          <img class="proj-thumb" src="images/proyecto-harvester.jpg" alt="Prácticas OSINT – The Harvester">
+          <div class="img-wrap">
+  <img src="images/proyecto-harvester.jpg" alt="Proyecto OSINT">
+</div>
 
           <div class="tags">
             <span class="tag">OSINT</span><span class="tag">theHarvester</span><span class="tag">Documentación</span>
