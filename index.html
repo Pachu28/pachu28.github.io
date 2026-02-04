@@ -7,356 +7,559 @@
 
   <style>
     :root{
-      --bg:#f5f7fb;
+      /* ✅ Paleta clara (solo cambié colores) */
+      --bg:#f6f8ff;
       --panel:#ffffff;
-      --panel2:#f9fafc;
+      --panel2:#f3f6ff;
       --text:#0f172a;
       --muted:#475569;
       --brand:#2563eb;
-      --brand2:#38bdf8;
-      --border:#e5e7eb;
-      --shadow: 0 10px 25px rgba(0,0,0,.08);
+      --brand2:#06b6d4;
+      --border:rgba(15,23,42,.12);
+      --shadow: 0 14px 40px rgba(2,6,23,.10);
       --radius:16px;
       --radius2:22px;
     }
 
     *{ box-sizing:border-box; }
     html{ scroll-behavior:smooth; }
-
     body{
       margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: linear-gradient(180deg, #f8fafc, #eef2ff);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+      background:
+        radial-gradient(900px 500px at 20% 0%, rgba(37,99,235,.14), transparent 55%),
+        radial-gradient(900px 500px at 90% 10%, rgba(6,182,212,.14), transparent 60%),
+        radial-gradient(700px 500px at 40% 100%, rgba(37,99,235,.08), transparent 60%),
+        var(--bg);
       color:var(--text);
     }
 
-    a{ color:var(--brand); text-decoration:none; }
-    a:hover{ text-decoration:underline; }
-
+    a{ color:inherit; text-decoration:none; }
     .container{ max-width:1100px; margin:0 auto; padding:0 18px; }
 
     /* NAV */
     .nav{
-      position:sticky;
-      top:0;
-      background:#ffffffcc;
+      position:sticky; top:0; z-index:50;
+      background: rgba(255,255,255,.75);
       backdrop-filter: blur(10px);
       border-bottom:1px solid var(--border);
-      z-index:50;
     }
     .nav-inner{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:14px 0;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 0;
     }
     .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
+      display:flex; align-items:center; gap:10px;
       font-weight:700;
+      letter-spacing:.3px;
     }
     .dot{
-      width:10px;
-      height:10px;
-      border-radius:50%;
+      width:10px; height:10px; border-radius:50%;
       background: linear-gradient(135deg, var(--brand), var(--brand2));
+      box-shadow: 0 0 18px rgba(37,99,235,.22);
     }
     .nav-links{
-      display:flex;
-      gap:14px;
-      font-size:.95rem;
+      display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end;
+      font-size:.95rem; color:var(--muted);
     }
     .nav-links a{
-      color:var(--muted);
-      padding:6px 8px;
-      border-radius:8px;
+      padding:8px 10px;
+      border-radius:10px;
+      border:1px solid transparent;
     }
     .nav-links a:hover{
-      background:var(--panel2);
       color:var(--text);
+      border-color:var(--border);
+      background: rgba(15,23,42,.04);
     }
 
     /* HERO */
     .hero{
-      padding:70px 0 40px;
+      padding:64px 0 28px;
     }
     .hero-grid{
       display:grid;
       grid-template-columns: 1.2fr .8fr;
       gap:20px;
+      align-items:stretch;
     }
     @media (max-width: 900px){
       .hero-grid{ grid-template-columns:1fr; }
     }
-
     .card{
-      background:var(--panel);
+      background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.86));
       border:1px solid var(--border);
-      border-radius:var(--radius2);
-      box-shadow:var(--shadow);
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
     }
-
     .hero-card{
-      padding:30px;
+      padding:28px;
+      position:relative;
+      overflow:hidden;
     }
+    .hero-card:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: radial-gradient(600px 240px at 20% 0%, rgba(37,99,235,.16), transparent 55%),
+                  radial-gradient(600px 260px at 80% 20%, rgba(6,182,212,.14), transparent 60%);
+      pointer-events:none;
+      filter: blur(0px);
+    }
+    .hero-card > *{ position:relative; }
 
+    .kicker{
+      color:var(--muted);
+      font-size:.95rem;
+      margin:0 0 10px;
+    }
     h1{
-      margin:0 0 14px;
-      font-size: clamp(2rem, 4vw, 3rem);
-      line-height:1.1;
+      margin:0 0 12px;
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      line-height:1.05;
+      letter-spacing:-.6px;
     }
-
     .subtitle{
+      margin:0 0 18px;
       color:var(--muted);
       font-size:1.05rem;
-      line-height:1.7;
-      max-width:60ch;
+      line-height:1.6;
+      max-width:62ch;
     }
 
     .pill-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin:20px 0;
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin:18px 0 22px;
     }
     .pill{
-      background:var(--panel2);
-      border:1px solid var(--border);
-      border-radius:999px;
       padding:8px 12px;
-      font-size:.9rem;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background: rgba(15,23,42,.03);
       color:var(--muted);
+      font-size:.9rem;
     }
-
     .actions{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
+      display:flex; gap:12px; flex-wrap:wrap;
+      margin-top:6px;
     }
     .btn{
-      padding:10px 14px;
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:11px 14px;
       border-radius:12px;
       border:1px solid var(--border);
-      background:var(--panel2);
-      font-weight:600;
+      background: rgba(15,23,42,.03);
       color:var(--text);
+      font-weight:600;
+    }
+    .btn:hover{
+      background: rgba(15,23,42,.06);
+      border-color: rgba(15,23,42,.16);
     }
     .btn.primary{
-      background:var(--brand);
-      color:white;
-      border-color:var(--brand);
+      background: linear-gradient(135deg, rgba(37,99,235,.18), rgba(6,182,212,.14));
+      border-color: rgba(37,99,235,.30);
     }
     .btn.primary:hover{
-      background:#1d4ed8;
+      border-color: rgba(6,182,212,.38);
     }
 
     /* SIDE */
     .side-card{
-      padding:24px;
+      padding:22px;
+      border-radius: var(--radius2);
     }
     .avatar{
-      width:70px;
-      height:70px;
-      border-radius:14px;
-      background:linear-gradient(135deg, var(--brand), var(--brand2));
-      color:white;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:700;
-      margin-bottom:12px;
-    }
-    .mini{
-      color:var(--muted);
-      line-height:1.6;
-    }
-
-    .facts{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:10px;
-      margin-top:16px;
-    }
-    .fact{
-      background:var(--panel2);
+      width:70px; height:70px;
+      border-radius:16px;
       border:1px solid var(--border);
-      border-radius:12px;
-      padding:12px;
+      background: radial-gradient(40px 40px at 30% 30%, rgba(37,99,235,.20), transparent 60%),
+                  radial-gradient(50px 50px at 70% 20%, rgba(6,182,212,.18), transparent 60%),
+                  rgba(15,23,42,.03);
+      display:flex; align-items:center; justify-content:center;
+      font-weight:800;
+      letter-spacing:.5px;
+      margin-bottom:12px;
+      color:var(--text);
     }
-    .label{
-      font-size:.85rem;
+
+    /* SECTIONS */
+    section{ padding:30px 0; }
+    .section-title{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:12px; flex-wrap:wrap;
+      margin-bottom:14px;
+    }
+    .section-title h2{
+      margin:0;
+      font-size:1.55rem;
+      letter-spacing:-.2px;
+    }
+    .section-title p{
+      margin:0;
       color:var(--muted);
     }
-    .value{
-      font-weight:600;
-    }
 
-    section{ padding:40px 0; }
-
-    .section-title h2{
-      margin:0 0 16px;
-      font-size:1.6rem;
-    }
-
-    /* PROJECTS */
+    /* GRID CARDS */
     .grid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
-      gap:16px;
+      gap:14px;
     }
-    @media (max-width: 900px){
-      .grid{ grid-template-columns:1fr 1fr; }
+    @media (max-width: 980px){
+      .grid{ grid-template-columns: 1fr 1fr; }
     }
-    @media (max-width: 600px){
-      .grid{ grid-template-columns:1fr; }
+    @media (max-width: 640px){
+      .grid{ grid-template-columns: 1fr; }
     }
 
     .proj{
-      background:var(--panel);
+      padding:16px;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.85);
       border:1px solid var(--border);
-      border-radius:var(--radius);
-      padding:18px;
-      box-shadow:var(--shadow);
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+    }
+    .proj:hover{
+      transform: translateY(-2px);
+      background: rgba(255,255,255,.92);
+      border-color: rgba(15,23,42,.18);
     }
     .proj h3{
-      margin:0 0 8px;
+      margin:6px 0 8px;
+      font-size:1.05rem;
+      letter-spacing:-.2px;
     }
     .proj p{
       margin:0 0 12px;
       color:var(--muted);
       line-height:1.6;
+      font-size:.95rem;
     }
     .tags{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      margin-bottom:10px;
+      display:flex; gap:8px; flex-wrap:wrap;
+      margin:0 0 12px;
     }
     .tag{
-      background:var(--panel2);
+      font-size:.82rem;
+      color:var(--muted);
       border:1px solid var(--border);
       border-radius:999px;
       padding:6px 10px;
-      font-size:.8rem;
-      color:var(--muted);
+      background: rgba(15,23,42,.02);
+    }
+    .links{
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+    .link{
+      font-weight:600;
+      color:var(--text);
+      padding:8px 10px;
+      border-radius:10px;
+      border:1px solid var(--border);
+      background: rgba(15,23,42,.02);
+    }
+    .link:hover{
+      background: rgba(15,23,42,.05);
+      border-color: rgba(15,23,42,.16);
     }
 
-    footer{
-      border-top:1px solid var(--border);
-      padding:24px 0 40px;
-      text-align:center;
+    /* SKILLS */
+    .skills{
+      display:flex; flex-wrap:wrap; gap:10px;
+    }
+    .skill{
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:10px 12px;
+      background: rgba(15,23,42,.02);
       color:var(--muted);
+      font-size:.95rem;
+    }
+
+    /* FOOTER */
+    footer{
+      padding:26px 0 42px;
+      color:var(--muted);
+      border-top:1px solid var(--border);
+      margin-top:24px;
+    }
+    .foot{
+      display:flex; gap:10px; justify-content:space-between; flex-wrap:wrap;
+      align-items:center;
+    }
+    .muted{ color:var(--muted); }
+
+    /* ✅ helpers para links e imágenes */
+    .img-slot{
+      width:100%;
+      border:1px dashed rgba(15,23,42,.22);
+      border-radius:14px;
+      background: rgba(15,23,42,.02);
+      padding:14px;
+      color:var(--muted);
+      font-size:.92rem;
+      text-align:center;
+    }
+    .proj-thumb{
+      width:100%;
+      height:160px;
+      object-fit:cover;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background: rgba(15,23,42,.02);
+      margin-bottom:12px;
+      display:block;
     }
   </style>
 </head>
 
 <body>
 
-<div class="nav">
-  <div class="container nav-inner">
-    <div class="brand">
-      <span class="dot"></span>
-      <span>TU_NOMBRE</span>
-    </div>
-    <div class="nav-links">
-      <a href="#sobre-mi">Sobre mí</a>
-      <a href="#proyectos">Proyectos</a>
-      <a href="#skills">Skills</a>
-      <a href="#contacto">Contacto</a>
-    </div>
-  </div>
-</div>
-
-<div class="container hero">
-  <div class="hero-grid">
-    <div class="card hero-card">
-      <h1>Portafolio de Ciberseguridad</h1>
-      <p class="subtitle">
-        Espacio personal donde documento prácticas, proyectos y aprendizaje
-        enfocados en OSINT, redes, Linux y seguridad informática.
-      </p>
-
-      <div class="pill-row">
-        <span class="pill">OSINT</span>
-        <span class="pill">Redes</span>
-        <span class="pill">Linux</span>
-        <span class="pill">Documentación técnica</span>
+  <!-- NAV -->
+  <div class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        <span class="dot"></span>
+        <span>TU_NOMBRE</span>
       </div>
-
-      <div class="actions">
-        <a class="btn primary" href="https://github.com/TU_USUARIO">GitHub</a>
-        <a class="btn" href="#proyectos">Ver proyectos</a>
-      </div>
-    </div>
-
-    <div class="card side-card">
-      <div class="avatar">TN</div>
-      <p class="mini">
-        Estudiante de ciberseguridad con interés en análisis defensivo,
-        reconocimiento OSINT y buenas prácticas en documentación técnica.
-      </p>
-
-      <div class="facts">
-        <div class="fact">
-          <div class="label">Ubicación</div>
-          <div class="value">Rep. Dominicana</div>
-        </div>
-        <div class="fact">
-          <div class="label">Área</div>
-          <div class="value">Ciberseguridad</div>
-        </div>
-        <div class="fact">
-          <div class="label">Stack</div>
-          <div class="value">Linux · Git · Redes</div>
-        </div>
-        <div class="fact">
-          <div class="label">Meta</div>
-          <div class="value">Primer rol TI</div>
-        </div>
+      <div class="nav-links">
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#skills">Skills</a>
+        <a href="#certs">Certificaciones</a>
+        <a href="#contacto">Contacto</a>
       </div>
     </div>
   </div>
-</div>
 
-<section id="proyectos">
-  <div class="container">
-    <div class="section-title">
-      <h2>Proyectos</h2>
-    </div>
-
-    <div class="grid">
-      <div class="proj">
-        <div class="tags">
-          <span class="tag">OSINT</span>
-          <span class="tag">theHarvester</span>
-        </div>
-        <h3>Prácticas OSINT – The Harvester</h3>
-        <p>
-          Recolección pasiva de información pública y análisis de exposición
-          utilizando fuentes OSINT.
+  <!-- HERO -->
+  <div class="container hero">
+    <div class="hero-grid">
+      <div class="card hero-card">
+        <p class="kicker">Ciberseguridad · OSINT · Redes · Linux</p>
+        <h1>Portafolio de proyectos y prácticas</h1>
+        <p class="subtitle">
+          Aquí documento lo que voy construyendo y aprendiendo: laboratorios OSINT,
+          fundamentos de redes, Linux y proyectos de desarrollo. Enfoque práctico,
+          documentación clara y buenas prácticas.
         </p>
-        <a href="#">Ver repositorio</a>
+
+        <div class="pill-row">
+          <span class="pill">🛡️ Reconocimiento OSINT</span>
+          <span class="pill">🌐 Network Basics</span>
+          <span class="pill">🐧 Linux</span>
+          <span class="pill">🧾 Documentación</span>
+        </div>
+
+        <div class="actions">
+          <a class="btn primary" href="https://github.com/TU_USUARIO" target="_blank" rel="noreferrer">Ver GitHub</a>
+          <a class="btn" href="#proyectos">Ver proyectos</a>
+          <a class="btn" href="#contacto">Contacto</a>
+        </div>
       </div>
 
-      <div class="proj">
-        <div class="tags">
-          <span class="tag">Redes</span>
-          <span class="tag">Nmap</span>
-        </div>
-        <h3>Laboratorios de Redes</h3>
-        <p>
-          Prácticas controladas de reconocimiento y fundamentos de redes.
-        </p>
-        <a href="#">Ver repositorio</a>
+      <!-- ✅ Quité el bloque "TN + bio + facts" como pediste.
+           Te dejo SOLO el avatar (para que se vea balanceado) y un slot opcional de imagen. -->
+      <div class="card side-card">
+        <div class="avatar">JM</div>
+
+        <!-- OPCIÓN A: coloca una foto tuya (recomendado)
+             1) crea carpeta /images
+             2) sube tu foto: images/perfil.jpg
+             3) descomenta este <img> y borra el div img-slot -->
+        <!--
+        <img class="proj-thumb" src="images/perfil.jpg" alt="Foto de perfil">
+        -->
+
+        <!-- OPCIÓN B: si no tienes imagen todavía, deja este placeholder -->
+        <div class="img-slot">Aquí puedes colocar una foto o un banner (images/perfil.jpg)</div>
       </div>
     </div>
   </div>
-</section>
 
-<footer>
-  © 2026 · TU_NOMBRE · GitHub Pages
-</footer>
+  <!-- SOBRE MI -->
+  <section id="sobre-mi">
+    <div class="container">
+      <div class="section-title">
+        <h2>Sobre mí</h2>
+        <!-- ✅ Quité el texto guía -->
+      </div>
+      <div class="card" style="padding:18px; border-radius: var(--radius2);">
+        <p class="muted" style="margin:0; line-height:1.8;">
+          Soy estudiante de ciberseguridad y utilizo este portafolio para mostrar prácticas documentadas
+          y proyectos. Me interesa especialmente el reconocimiento OSINT, fundamentos de redes, Linux y
+          seguridad defensiva. Mi enfoque es aprender con estructura: documentar, practicar y mejorar.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROYECTOS -->
+  <section id="proyectos">
+    <div class="container">
+      <div class="section-title">
+        <h2>Proyectos</h2>
+        <!-- ✅ Quité el texto guía -->
+      </div>
+
+      <div class="grid">
+        <div class="proj">
+          <!-- ✅ Slot de imagen del proyecto (opcional)
+               Sube una imagen a /images y cambia el src -->
+          <!-- <img class="proj-thumb" src="images/proyecto-harvester.jpg" alt="Prácticas OSINT – The Harvester"> -->
+          <div class="img-slot" style="margin-bottom:12px;">Imagen del proyecto (images/proyecto-harvester.jpg)</div>
+
+          <div class="tags">
+            <span class="tag">OSINT</span><span class="tag">theHarvester</span><span class="tag">Documentación</span>
+          </div>
+          <h3>Prácticas OSINT – The Harvester</h3>
+          <p>Documentación clara del proceso de recolección pasiva de información y análisis de resultados.</p>
+          <div class="links">
+            <a class="link" href="https://github.com/TU_USUARIO/REPO-OSINT" target="_blank" rel="noreferrer">Repositorio</a>
+            <a class="link" href="https://TU_USUARIO.github.io/REPO-OSINT/" target="_blank" rel="noreferrer">Demo (opcional)</a>
+          </div>
+        </div>
+
+        <div class="proj">
+          <!-- <img class="proj-thumb" src="images/proyecto-redes.jpg" alt="Laboratorios de Redes"> -->
+          <div class="img-slot" style="margin-bottom:12px;">Imagen del proyecto (images/proyecto-redes.jpg)</div>
+
+          <div class="tags">
+            <span class="tag">Redes</span><span class="tag">Nmap</span><span class="tag">Labs</span>
+          </div>
+          <h3>Laboratorios de Redes</h3>
+          <p>Reconocimiento, conceptos base y prácticas en entornos controlados (sin objetivos reales).</p>
+          <div class="links">
+            <a class="link" href="https://github.com/TU_USUARIO/REPO-REDES" target="_blank" rel="noreferrer">Repositorio</a>
+            <a class="link" href="https://TU_USUARIO.github.io/REPO-REDES/" target="_blank" rel="noreferrer">Demo (opcional)</a>
+          </div>
+        </div>
+
+        <div class="proj">
+          <!-- <img class="proj-thumb" src="images/proyecto-linux.jpg" alt="Linux para seguridad"> -->
+          <div class="img-slot" style="margin-bottom:12px;">Imagen del proyecto (images/proyecto-linux.jpg)</div>
+
+          <div class="tags">
+            <span class="tag">Linux</span><span class="tag">Permisos</span><span class="tag">Notas</span>
+          </div>
+          <h3>Linux para seguridad</h3>
+          <p>Notas y prácticas: usuarios/grupos, permisos, comandos clave y troubleshooting.</p>
+          <div class="links">
+            <a class="link" href="https://github.com/TU_USUARIO/REPO-LINUX" target="_blank" rel="noreferrer">Repositorio</a>
+            <a class="link" href="https://TU_USUARIO.github.io/REPO-LINUX/" target="_blank" rel="noreferrer">Demo (opcional)</a>
+          </div>
+        </div>
+
+        <div class="proj">
+          <!-- <img class="proj-thumb" src="images/proyecto-ventas.jpg" alt="Sistema de Ventas (Desktop)"> -->
+          <div class="img-slot" style="margin-bottom:12px;">Imagen del proyecto (images/proyecto-ventas.jpg)</div>
+
+          <div class="tags">
+            <span class="tag">Dev</span><span class="tag">VB.NET</span><span class="tag">SQL Server</span>
+          </div>
+          <h3>Sistema de Ventas (Desktop)</h3>
+          <p>Proyecto desktop con base de datos: facturación, inventario y reportes (en progreso).</p>
+          <div class="links">
+            <a class="link" href="https://github.com/TU_USUARIO/REPO-VENTAS" target="_blank" rel="noreferrer">Repositorio</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-title">
+        <h2>Skills</h2>
+        <p>Solo lo que realmente usas.</p>
+      </div>
+
+      <div class="card" style="padding:18px; border-radius: var(--radius2);">
+        <div class="skills">
+          <span class="skill">Linux (Kali/Ubuntu)</span>
+          <span class="skill">Git & GitHub</span>
+          <span class="skill">Redes (TCP/IP básico)</span>
+          <span class="skill">OSINT</span>
+          <span class="skill">Nmap (en entornos autorizados)</span>
+          <span class="skill">Documentación técnica</span>
+          <span class="skill">VB.NET</span>
+          <span class="skill">SQL Server</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTS -->
+  <section id="certs">
+    <div class="container">
+      <div class="section-title">
+        <h2>Certificaciones / Cursos</h2>
+        <p>Agrega enlaces si tienes.</p>
+      </div>
+
+      <div class="grid">
+        <div class="proj">
+          <!-- <img class="proj-thumb" src="images/cert-sbt.jpg" alt="Security Blue Team"> -->
+          <div class="img-slot" style="margin-bottom:12px;">Imagen/Badge (images/cert-sbt.jpg)</div>
+
+          <h3>Security Blue Team</h3>
+          <p>Curso/Badge: (pon aquí el nombre exacto). Enfoque: fundamentos blue team, detección y respuesta.</p>
+          <div class="links">
+            <a class="link" href="LINK_A_EVIDENCIA" target="_blank" rel="noreferrer">Evidencia</a>
+          </div>
+        </div>
+
+        <div class="proj">
+          <!-- <img class="proj-thumb" src="images/cert-cisco.jpg" alt="Cisco Networking Academy"> -->
+          <div class="img-slot" style="margin-bottom:12px;">Imagen/Badge (images/cert-cisco.jpg)</div>
+
+          <h3>Cisco Networking Academy</h3>
+          <p>Curso: (pon el nombre). Enfoque: redes y fundamentos.</p>
+          <div class="links">
+            <a class="link" href="LINK_A_EVIDENCIA" target="_blank" rel="noreferrer">Evidencia</a>
+          </div>
+        </div>
+
+        <div class="proj">
+          <!-- <img class="proj-thumb" src="images/cert-talento.jpg" alt="Talento Digital"> -->
+          <div class="img-slot" style="margin-bottom:12px;">Imagen/Badge (images/cert-talento.jpg)</div>
+
+          <h3>Talento Digital</h3>
+          <p>Curso: (pon el nombre). Enfoque: ciberseguridad / TI.</p>
+          <div class="links">
+            <a class="link" href="LINK_A_EVIDENCIA" target="_blank" rel="noreferrer">Evidencia</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto">
+    <div class="container">
+      <div class="section-title">
+        <h2>Contacto</h2>
+        <p>Deja 2–3 vías máximo.</p>
+      </div>
+
+      <div class="card" style="padding:18px; border-radius: var(--radius2);">
+        <p class="muted" style="margin:0; line-height:1.9;">
+          <strong>GitHub:</strong> <a href="https://github.com/TU_USUARIO" target="_blank" rel="noreferrer">github.com/TU_USUARIO</a><br>
+          <strong>Email:</strong> <a href="mailto:TU_EMAIL">TU_EMAIL</a><br>
+          <strong>LinkedIn:</strong> <a href="https://linkedin.com/in/TU_LINK" target="_blank" rel="noreferrer">linkedin.com/in/TU_LINK</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container foot">
+      <span>© 2026 · TU_NOMBRE</span>
+      <span class="muted">Hecho con GitHub Pages</span>
+    </div>
+  </footer>
 
 </body>
 </html>
