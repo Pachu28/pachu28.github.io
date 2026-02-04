@@ -197,7 +197,7 @@
       border-color: rgba(15,23,42,.18);
     }
     .proj h3{
-      margin:6px 0 8px;
+      margin:8px 0 8px; /* un poco más de respiro */
       font-size:1.05rem;
       letter-spacing:-.2px;
     }
@@ -207,18 +207,25 @@
       line-height:1.6;
       font-size:.95rem;
     }
+
+    /* ✅ TAGS con buen espacio y que no se peguen a la imagen */
     .tags{
-      display:flex; gap:8px; flex-wrap:wrap;
-      margin:0 0 12px;
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin:12px 0 14px;  /* más espacio arriba/abajo */
     }
     .tag{
       font-size:.82rem;
       color:var(--muted);
       border:1px solid var(--border);
       border-radius:999px;
-      padding:6px 10px;
+      padding:7px 12px;    /* un poquito más grande */
       background: rgba(15,23,42,.02);
+      line-height:1;       /* evita que se vea raro */
+      white-space:nowrap;  /* mejor “pill” */
     }
+
     .links{
       display:flex; gap:10px; flex-wrap:wrap;
     }
@@ -260,26 +267,32 @@
       align-items:center;
     }
 
-    /* IMÁGENES */
-    .proj-thumb{
-  width: 100%;
-  height: 160px;        /* altura fija del cuadro */
-  object-fit: cover;   /* CLAVE */
-  border-radius: 14px;
-}
+    /* ✅ IMAGEN: se verá centrada y sin “cortes raros” */
     .img-wrap{
-  width: 100%;
-  height: 160px;
-  overflow: hidden;
-  border-radius: 14px;
-  border: 1px solid var(--border);
-}
+      width:100%;
+      height:170px;              /* un poquito más alto para que se aprecie mejor */
+      overflow:hidden;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background: var(--panel2);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .img-wrap img{
+      width:100%;
+      height:100%;
+      object-fit: contain;        /* ✅ para logos/íconos como el tuyo (no se recorta) */
+      object-position:center;
+      padding:10px;              /* ✅ evita que se pegue a los bordes */
+      display:block;
+    }
 
-.img-wrap img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+    /* Para fotos normales (no logos), usa esta clase */
+    .img-wrap.cover img{
+      object-fit: cover;          /* llena el cuadro recortando */
+      padding:0;
+    }
   </style>
 </head>
 
@@ -319,7 +332,7 @@
         </div>
       </div>
 
-      <!-- SOBRE MÍ (SIN JM) -->
+      <!-- SOBRE MÍ -->
       <div class="card side-card" id="sobre-mi">
         <h2 class="about-title">Sobre mí</h2>
         <p class="muted" style="margin:0; line-height:1.8;">
@@ -341,14 +354,16 @@
 
       <div class="grid">
         <div class="proj">
-          <!-- ✅ Opción A (imagen real) -->
+
+          <!-- ✅ Para LOGOS como el de tu captura: usa img-wrap (contain) -->
           <div class="img-wrap">
-  <img src="images/proyecto-harvester.jpg" alt="Proyecto OSINT">
-</div>
+            <img src="images/proyecto-harvester.jpg" alt="Prácticas OSINT – The Harvester">
+          </div>
 
           <div class="tags">
             <span class="tag">OSINT</span><span class="tag">theHarvester</span><span class="tag">Documentación</span>
           </div>
+
           <h3>Prácticas OSINT – The Harvester</h3>
           <p>Práctica documentada de recolección pasiva de información y revisión de resultados.</p>
           <div class="links">
@@ -358,11 +373,15 @@
         </div>
 
         <div class="proj">
-          <img class="proj-thumb" src="images/proyecto-redes.jpg" alt="Laboratorios de Redes">
+          <!-- ✅ Si esta es FOTO normal, cambia a: class="img-wrap cover" -->
+          <div class="img-wrap cover">
+            <img src="images/proyecto-redes.jpg" alt="Laboratorios de Redes">
+          </div>
 
           <div class="tags">
             <span class="tag">Redes</span><span class="tag">Nmap</span><span class="tag">Labs</span>
           </div>
+
           <h3>Laboratorios de Redes</h3>
           <p>Ejercicios y laboratorios controlados para reforzar fundamentos de redes.</p>
           <div class="links">
@@ -372,11 +391,14 @@
         </div>
 
         <div class="proj">
-          <img class="proj-thumb" src="images/proyecto-linux.jpg" alt="Linux para seguridad">
+          <div class="img-wrap cover">
+            <img src="images/proyecto-linux.jpg" alt="Linux para seguridad">
+          </div>
 
           <div class="tags">
             <span class="tag">Linux</span><span class="tag">Permisos</span><span class="tag">Notas</span>
           </div>
+
           <h3>Linux para seguridad</h3>
           <p>Apuntes y prácticas de comandos, permisos y conceptos esenciales.</p>
           <div class="links">
@@ -386,11 +408,14 @@
         </div>
 
         <div class="proj">
-          <img class="proj-thumb" src="images/proyecto-ventas.jpg" alt="Sistema de Ventas (Desktop)">
+          <div class="img-wrap cover">
+            <img src="images/proyecto-ventas.jpg" alt="Sistema de Ventas (Desktop)">
+          </div>
 
           <div class="tags">
             <span class="tag">Dev</span><span class="tag">VB.NET</span><span class="tag">SQL Server</span>
           </div>
+
           <h3>Sistema de Ventas (Desktop)</h3>
           <p>Aplicación desktop con base de datos: facturación, inventario y reportes.</p>
           <div class="links">
@@ -433,7 +458,9 @@
 
       <div class="grid">
         <div class="proj">
-          <img class="proj-thumb" src="images/cert-sbt.jpg" alt="Security Blue Team">
+          <div class="img-wrap">
+            <img src="images/cert-sbt.jpg" alt="Security Blue Team">
+          </div>
           <h3>Security Blue Team</h3>
           <p>Curso/Badge: (pon aquí el nombre exacto). Enfoque: fundamentos blue team, detección y respuesta.</p>
           <div class="links">
@@ -442,7 +469,9 @@
         </div>
 
         <div class="proj">
-          <img class="proj-thumb" src="images/cert-cisco.jpg" alt="Cisco Networking Academy">
+          <div class="img-wrap">
+            <img src="images/cert-cisco.jpg" alt="Cisco Networking Academy">
+          </div>
           <h3>Cisco Networking Academy</h3>
           <p>Curso: (pon el nombre). Enfoque: redes y fundamentos.</p>
           <div class="links">
@@ -451,7 +480,9 @@
         </div>
 
         <div class="proj">
-          <img class="proj-thumb" src="images/cert-talento.jpg" alt="Talento Digital">
+          <div class="img-wrap">
+            <img src="images/cert-talento.jpg" alt="Talento Digital">
+          </div>
           <h3>Talento Digital</h3>
           <p>Curso: (pon el nombre). Enfoque: ciberseguridad / TI.</p>
           <div class="links">
